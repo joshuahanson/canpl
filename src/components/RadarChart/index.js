@@ -85,7 +85,7 @@ class RadarChart extends React.Component {
     // ]
     const { series } = this.props
     return (
-      <div>
+      <div className="radar-chart">
         <div id="chart">
           <ReactApexChart options={this.state.options} series={series} type="radar" height={350} />
         </div>

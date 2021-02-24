@@ -10,6 +10,7 @@ class Nav extends React.Component {
       <StyledNav>
           <Link to="/">
             <img src={logo} />
+            <span style={{textAlign: 'center'}}>CANPLSCOUTING</span>
           </Link>
       </StyledNav>
     )
@@ -19,8 +20,24 @@ class Nav extends React.Component {
 const StyledNav = styled.nav`
   padding: 1em;
   text-align: center;
-  img {
-    max-width: 85px;
+
+  a { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    text-decoration: none;
+
+    img {
+      max-width: 55px;
+    }
+    
+    span {
+      margin-left: 0.5em;
+      font-size: 2em;
+      text-decoration: none;
+      font-weight: 700;
+    }
   }
 `
 

@@ -2,7 +2,7 @@ import React from 'react'
 import AllPlayers from './AllPlayers'
 import SortBar from './components/SortBar'
 
-class Home extends React.Component {
+class HomeNew extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -127,7 +127,7 @@ class Home extends React.Component {
   }
   
   render() {
-    const { history } = this.props
+    const { history, seasonData } = this.props
     const allPlayerState = this.state.allPlayerData
     const role = this.state.role
     const sortedBy = this.state.sortedBy
@@ -143,4 +143,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default HomeNew;

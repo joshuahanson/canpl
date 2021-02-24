@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import RadarChart from './components/RadarChart'
 import {
   renderMinutes,
   renderInterceptions,
@@ -7,7 +8,14 @@ import {
   renderClearances,
   renderDuelsSeason,
   renderBlocksSeason,
+  returnInterceptionsNinety,
+  returnTacklePerNinety,
+  returnBlocksPerNinety,
+  returnRecoveriesPerNinety,
+  returnClearancesPerNinety,
 } from './utils/index'
+
+import { Card } from './styledComponents'
 
 class DefensivePlayer extends React.Component {
   constructor(props) {
@@ -43,14 +51,12 @@ class DefensivePlayer extends React.Component {
   updatePlayerData(data) {
     const { match } = this.props
     let playerList = []
-    console.log(`${match.params.id}`)
     data.map(game => {
       if (match.params.id === game.playerId) {
         playerList.push(game)
       }
     })
     playerList.sort((d1, d2) => new Date(d1.date).getTime() - new Date(d2.date).getTime())
-    console.log(playerList)
     this.setState({ playerData: playerList })
   }
 
@@ -64,59 +70,196 @@ class DefensivePlayer extends React.Component {
       const duelsSeason = renderDuelsSeason(data)
       const blocksSeason = renderBlocksSeason(data)
       const tacklesSeason = renderTackle(data)
+      const playerAge = data[0].Age
+      const playerTeam = data[0].team
+
+      const SIntercepts = returnInterceptionsNinety(data)
+      const STackles = returnTacklePerNinety(data)
+      const SBlocks = returnBlocksPerNinety(data)
+      const SClearances = returnClearancesPerNinety(data)
+      const SRecoveries = returnRecoveriesPerNinety(data)
+
+
+      const series = [
+        {
+          name: playerName,
+          data: [
+            SIntercepts,
+            STackles,
+            SClearances,
+            SBlocks,
+            SRecoveries,
+          ],
+        },
+      ]
 
       return (
-        <GuideContainer>
-          <h2>{playerName} Key Defensive Stats</h2>
-          <p>Games: {data.length}</p>
-          <p>Minutes: {gameMins}</p>
-        
-          <FlexRow>
-            <FlexColHalf>
-              <h3>Tackles Season</h3>
-              {tacklesSeason}
-            </FlexColHalf>
-            <FlexColHalf>
-              <h3>Interceptions Season</h3>
-              {interCeptionsYear}
-            </FlexColHalf>
-          </FlexRow>
+        <PlayerPage>
+          <PlayerContainer>
+            <Card>
+              <h2>{playerName}</h2>
+              <p>Games: {data.length}</p>
+              <p>Minutes: {gameMins}</p>
+              <p>Age: {playerAge}</p>
+              <p>Team: {playerTeam}</p>
+              <RadarChart series={series} />
+              <FlexRow>
+                <FlexColHalf>
+                  <h3>Tackles Season</h3>
+                  {tacklesSeason}
+                </FlexColHalf>
+                <FlexColHalf>
+                  <h3>Interceptions Season</h3>
+                  {interCeptionsYear}
+                </FlexColHalf>
+              </FlexRow>
 
-          <FlexRow>
-            <FlexColHalf>
-              <h3>Clearances Season</h3>
-              {clearancesYear}
-            </FlexColHalf>
-            <FlexColHalf>
-              <h3>Duels by Season</h3>
-              {duelsSeason}
-            </FlexColHalf>
-          </FlexRow>
+              <FlexRow>
+                <FlexColHalf>
+                  <h3>Clearances Season</h3>
+                  {clearancesYear}
+                </FlexColHalf>
+                <FlexColHalf>
+                  <h3>Duels by Season</h3>
+                  {duelsSeason}
+                </FlexColHalf>
+              </FlexRow>
 
-          <FlexRow>
-            <FlexColHalf>
-              <h3>Blocks by Season</h3>
-              {blocksSeason}
-            </FlexColHalf>
-          </FlexRow> 
+              <FlexRow>
+                <FlexColHalf>
+                  <h3>Blocks by Season</h3>
+                  {blocksSeason}
+                </FlexColHalf>
+              </FlexRow>
 
-        </GuideContainer>
+              {/*  */}
+              <div>
+                <h4>Defending</h4>
+                <TableWrapper>
+                  <StyledTable>
+                    <tr>
+                      <th>Game</th>
+                      <th>Position</th>
+                      <th>Mins</th>
+                      <th>Touches</th>
+                      <th>
+                        Tackles {' '}
+                        <span className="emoji">✅</span>
+                      </th>
+                      <th>
+                        Tackles {' '}
+                        <span className="emoji">❌</span>
+                      </th>
+                      <th>
+                        Duels {' '}
+                        <span className="emoji">✅</span>
+                      </th>
+                      <th>
+                        Duels {' '}
+                        <span className="emoji">❌</span>
+                      </th>
+                      <th>TchsD3</th>
+                      <th>TchsM3</th>
+                      <th>TchsA3</th>
+                    </tr>
+                    {data.map(game => {
+                      return (
+                        <tr style={{position: 'relative'}}>
+                          <td>
+                            {game.scatterExtra}
+                          </td>
+                          <td>
+                            {game.Position}
+                          </td>
+                          <td>
+                            {game.Min}
+                          </td>
+                          <td>
+                            {game.Touches}
+                          </td>
+                          <td>
+                            {game.SucflTkls}
+                          </td>
+                          <td>
+                            {game.FailTackle}
+                          </td>
+                          <td>
+                            {game.SucflDuels}
+                          </td>
+                          <td>
+                            {game.DuelLs}  
+                          </td>
+                          <td>
+                            {game.TchsD3}
+                          </td>
+                          <td>
+                            {game.TchsM3}
+                          </td>
+                          <td>
+                            {game.TchsA3}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </StyledTable>
+                </TableWrapper>
+              </div>
+            </Card>
+          </PlayerContainer>
+        </PlayerPage>
       )
     }
     return ''
   }
 }
 
-const GuideContainer = styled.div`
-  padding: 1em;
-  margin: 1em auto;
-  max-width: 1000px;
-  ul {
-    padding-left: 1.45em;
-    li {
-      margin-bottom: 1em;
+const TableWrapper =styled.div`
+  overflow-x: scroll;
+`
+
+const StyledTable = styled.table`
+  background: #f2f2f2;
+  border: #999;
+  width: 100%;
+  width: max-content;
+  border-spacing: 0;
+  border-collapse: collapse;
+  th,
+  td {
+    text-align: left;
+    padding: 0.5em;
+    border-right: 1px solid black;
+    background: #f2f2f2;
+  }
+  tr {
+    position: relative;
+    border: 1px solid black;
+  }
+  &.float-title {
+    th,
+    td {
+      &:first-of-type {
+        position: absolute;
+        width: 175px;
+        font-size: 14px;
+        border: 1px solid black;
+        margin: 0px 0 0;
+        padding: 8px 0.5em;
+        margin-top: -1px;
+        height: 20px;
+      }
     }
   }
+`
+
+const PlayerPage = styled.article`
+  background: #f2f2f2;
+`
+
+const PlayerContainer = styled.div`
+  padding: 2em 1em;
+  margin: 1em auto;
+  max-width: 800px;
 `
 
 const FlexRow = styled.div`

@@ -23,6 +23,48 @@ const renderMinutes = (data) => {
   return playerMins
 }
 
+const returnInterceptionsNinety = (data) => {
+  const interceptsSum = data.reduce((a, b) => ({Int: parseInt(a.Int, 10) + parseInt(b.Int, 10)}))
+  const interceptsPerNinety = ((interceptsSum.Int / renderMinutes(data)) * 90).toFixed(2)
+  return interceptsPerNinety
+}
+
+const returnTacklePerNinety = (data) => {
+  let tacklesSuccess = 0
+  data.map(game => {
+    tacklesSuccess += parseInt(game.SucflTkls, 10)
+  });
+  const tacklesPer = ((tacklesSuccess / renderMinutes(data)) * 90).toFixed(2)
+  return tacklesPer
+}
+
+const returnBlocksPerNinety = (data) => {
+  let defenseBlocks = 0
+  data.map(game => {
+    defenseBlocks += parseInt(game.DefensiveBlocks, 10)
+  });
+  const blocksPer = ((defenseBlocks / renderMinutes(data)) * 90).toFixed(2)
+  return blocksPer
+}
+
+const returnRecoveriesPerNinety = (data) => {
+  let recoveries = 0
+  data.map(game => {
+    recoveries += parseInt(game.Recovery, 10)
+  });
+  const recovPer = ((recoveries / renderMinutes(data)) * 90).toFixed(2)
+  return recovPer
+}
+
+const returnClearancesPerNinety = (data) => {
+  let clearances = 0
+  data.map(game => {
+    clearances += parseInt(game.Clrnce, 10)
+  });
+  const clearPer = ((clearances / renderMinutes(data)) * 90).toFixed(2)
+  return clearPer
+}
+
 const renderInterceptions = (data) => {
   const interceptsSum = data.reduce((a, b) => ({Int: parseInt(a.Int, 10) + parseInt(b.Int, 10)}))
   const interceptsPerNinety = ((interceptsSum.Int / renderMinutes(data)) * 90).toFixed(2)
@@ -111,11 +153,57 @@ const renderBlocksSeason = (data) => {
   )
 }
 
+const redCardsSeason = (data) => {
+  let reds = 0
+
+  data.map(game => {
+    reds += parseInt(game.Red, 10)
+  });
+
+  return reds
+}
+const yellowCardsSeason = (data) => {
+  let yellow = 0
+
+  data.map(game => {
+    yellow += parseInt(game.Yellow, 10)
+  });
+
+  return yellow
+}
+const goalsSeason = (data) => {
+  let goals = 0
+
+  data.map(game => {
+    goals += parseInt(game.Goal, 10)
+  });
+
+  return goals
+}
+const assistsSeason = (data) => {
+  let assists = 0
+
+  data.map(game => {
+    assists += parseInt(game.Ast, 10)
+  });
+
+  return assists
+}
+
 export {
+  returnInterceptionsNinety,
+  returnTacklePerNinety,
+  returnBlocksPerNinety,
+  returnRecoveriesPerNinety,
+  returnClearancesPerNinety,
   renderMinutes,
   renderInterceptions,
   renderTackle,
   renderClearances,
   renderDuelsSeason,
   renderBlocksSeason,
+  redCardsSeason,
+  yellowCardsSeason,
+  goalsSeason,
+  assistsSeason,
 }
