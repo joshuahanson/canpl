@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/canpl/static/css/main.5c105888.chunk.css",
-    "main.js": "/canpl/static/js/main.e3255ec5.chunk.js",
-    "main.js.map": "/canpl/static/js/main.e3255ec5.chunk.js.map",
-    "runtime-main.js": "/canpl/static/js/runtime-main.a88e4178.js",
-    "runtime-main.js.map": "/canpl/static/js/runtime-main.a88e4178.js.map",
-    "static/js/2.55b9e2ae.chunk.js": "/canpl/static/js/2.55b9e2ae.chunk.js",
-    "static/js/2.55b9e2ae.chunk.js.map": "/canpl/static/js/2.55b9e2ae.chunk.js.map",
-    "index.html": "/canpl/index.html",
-    "precache-manifest.e74ac788ccad15b3614160d652f3f949.js": "/canpl/precache-manifest.e74ac788ccad15b3614160d652f3f949.js",
-    "service-worker.js": "/canpl/service-worker.js",
-    "static/css/main.5c105888.chunk.css.map": "/canpl/static/css/main.5c105888.chunk.css.map",
-    "static/js/2.55b9e2ae.chunk.js.LICENSE": "/canpl/static/js/2.55b9e2ae.chunk.js.LICENSE",
-    "static/media/CentreCircle.png": "/canpl/static/media/CentreCircle.2d430caf.png",
-    "static/media/Island_Games_logo.png": "/canpl/static/media/Island_Games_logo.3ce6f923.png",
-    "static/media/StatsPerform.png": "/canpl/static/media/StatsPerform.5aec06e0.png",
-    "static/media/blank-icon.png": "/canpl/static/media/blank-icon.4b0bd202.png"
+    "main.css": "/static/css/main.5c105888.chunk.css",
+    "main.js": "/static/js/main.7f9e9c82.chunk.js",
+    "main.js.map": "/static/js/main.7f9e9c82.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5674c429.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5674c429.js.map",
+    "static/js/2.1e7e2c69.chunk.js": "/static/js/2.1e7e2c69.chunk.js",
+    "static/js/2.1e7e2c69.chunk.js.map": "/static/js/2.1e7e2c69.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f03072c098debc2d34b2dedb194d6202.js": "/precache-manifest.f03072c098debc2d34b2dedb194d6202.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.5c105888.chunk.css.map": "/static/css/main.5c105888.chunk.css.map",
+    "static/js/2.1e7e2c69.chunk.js.LICENSE": "/static/js/2.1e7e2c69.chunk.js.LICENSE",
+    "static/media/CentreCircle.png": "/static/media/CentreCircle.2d430caf.png",
+    "static/media/Island_Games_logo.png": "/static/media/Island_Games_logo.3ce6f923.png",
+    "static/media/StatsPerform.png": "/static/media/StatsPerform.5aec06e0.png",
+    "static/media/blank-icon.png": "/static/media/blank-icon.4b0bd202.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a88e4178.js",
-    "static/js/2.55b9e2ae.chunk.js",
+    "static/js/runtime-main.5674c429.js",
+    "static/js/2.1e7e2c69.chunk.js",
     "static/css/main.5c105888.chunk.css",
-    "static/js/main.e3255ec5.chunk.js"
+    "static/js/main.7f9e9c82.chunk.js"
   ]
 }
