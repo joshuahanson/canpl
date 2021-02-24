@@ -49,7 +49,6 @@ class Routes extends React.Component {
     let sortedPlayersArray = []
     
     if(games && games.length > 0 && season && season.length > 0) {
-
       season.map(player => {
         const playerID = player.optaPersonId
         const playerGames = games.filter(item => item.optaPersonId === playerID)
