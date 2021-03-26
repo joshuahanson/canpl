@@ -54,35 +54,12 @@ class AllPlayers extends React.Component {
 
   filterPlayersByMin(data, minMinutes) {
     let sortedPlayersArray = []
-    data.map(game => {
-      const currentPlayerId = game.playerId
-      const playerExistsInNew = _.find(sortedPlayersArray, ['playerId', currentPlayerId])
-      if (!playerExistsInNew) {
-        const playerGames = data.filter(item => item.playerId === currentPlayerId)
-        const playerMins = renderMinutes([...playerGames])
-        if (minMinutes) { 
-          if(playerMins >= minMinutes) {
-            sortedPlayersArray.push(
-              {
-                playerId: currentPlayerId,
-                name: game.player,
-                games: [...playerGames],
-                mins: playerMins
-              },
-            )
-          }
-        } else {
-          sortedPlayersArray.push(
-            {
-              playerId: currentPlayerId,
-              name: game.player,
-              games: [...playerGames],
-              mins: playerMins
-            },
-          )
-        }
-      }
+
+    data.map(player => {
+      const playMins = player.Min
+      if (playMins >= minMinutes) sortedPlayersArray.push(player)
     })
+    
     return sortedPlayersArray
   }
 
@@ -108,9 +85,14 @@ class AllPlayers extends React.Component {
   }
 
   renderPlayerData(data) {
+    const { team } = this.props
+    const teams = data.filter(item => item.team == team)
+
+    const dataToDisplay = teams.length > 0 ? teams : data
+
     return (
       <React.Fragment>
-        {data.map(player => {
+        {dataToDisplay.map(player => {
           const gameMins = renderMinutes(player.games)
           const interCeptionsYear = renderInterceptions(player.games)
           const clearancesYear = renderClearances(player.games)
@@ -130,8 +112,8 @@ class AllPlayers extends React.Component {
                   <img src={profileIcon} />
                 </PlayerImage>
                 <h2>
-                  <Link to={`/player/${player.playerId}`}>
-                    {player.name} 
+                  <Link to={`/player/${player.optaPersonId}`}>
+                    {player.player} 
                   </Link>
                 </h2>
                 <FlexRow style={{justifyContent: 'space-evenly'}}>
@@ -141,7 +123,7 @@ class AllPlayers extends React.Component {
                   </p>
                   <p>
                     <strong>Minutes: </strong>
-                    {gameMins}
+                    {player.Min}
                   </p>
                   <p>
                     <strong>Goals: </strong> 
@@ -195,8 +177,8 @@ class AllPlayers extends React.Component {
 
   render() {
     const { data } = this.props 
-    const players = this.state.players
     if (data && data.length > 0) {
+      console.log(data)
       const playerData = this.filterPlayersByMin(data, 270)
       const sortedData = this.sortPlayers(playerData)
       const playerList = this.renderPlayerData(sortedData)

@@ -113,12 +113,14 @@ const renderClearances = (data) => {
 }
 
 const renderDuelsSeason = (data) => {
-  let successDuels = 0
-  let lostDuels = 0
-  data.map(game => {
-    successDuels += parseInt(game.SucflDuels, 10)
-    lostDuels += parseInt(game.DuelLs, 10)
-  });
+  // let successDuels = 0
+  // let lostDuels = 0
+  // data.map(game => {
+  //   successDuels += parseInt(game.SucflDuels, 10)
+  //   lostDuels += parseInt(game.DuelLs, 10)
+  // });
+  const successDuels = parseInt(data.SucflDuels, 10)
+  const lostDuels = parseInt(data.DuelLs, 10)
   const percentDuels = ((successDuels / (successDuels + lostDuels)) * 90).toFixed(2)
   return (
     <React.Fragment>

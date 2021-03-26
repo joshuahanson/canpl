@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Footer from './components/Footer'
 import Nav from './components/Nav'
+import Forge from './containers/teams/forge'
 import Home from './Home';
 import HomeNew from './HomeNew';
 import DefensivePlayer from './DefensivePlayer';
@@ -14,35 +15,20 @@ class Routes extends React.Component {
     super(props)
     this.state = {
       gameData: [],
-      playerGameData: [],
-      playerSeasonData: [],
+      fullPlayerData: [],
     }
     this.updateTeamData = this.updateTeamData.bind(this)
-    this.updatePlayerData = this.updatePlayerData.bind(this)
-    this.updatePlayerSeasonData = this.updatePlayerSeasonData.bind(this)
+    this.createFullPlayerData = this.createFullPlayerData.bind(this)
   }
 
   componentDidMount() {
     this.updateTeamData(games)
-    this.updatePlayerData(playersByGame)
-    this.updatePlayerSeasonData(playersBySeason)
+    this.createFullPlayerData(playersByGame, playersBySeason)
   }
 
   updateTeamData(result) {
     const data = result
     this.setState({ gameData: data })
-  }
-
-  updatePlayerData(result) {
-    const data = result
-    data.sort((d1, d2) => new Date(d1.date).getTime() - new Date(d2.date).getTime())
-    this.setState({ playerGameData: data })
-  }
-
-  updatePlayerSeasonData(result) {
-    const data = result
-    data.sort((d1, d2) => d1.lastName.localeCompare(d2.lastName))
-    this.setState({ playerSeasonData: data })
   }
 
   createFullPlayerData(games, season) {
@@ -58,15 +44,12 @@ class Routes extends React.Component {
         }
         sortedPlayersArray.push(playerFormatted)
       })
-      return sortedPlayersArray
+      this.setState({ fullPlayerData: sortedPlayersArray })
     }
   }
 
   render() {
-    const playerGameData = this.state.playerGameData
-    const playerSeasonData = this.state.playerSeasonData
-    const fullPlayerData = this.createFullPlayerData(playerGameData, playerSeasonData)
-    console.log(fullPlayerData)
+    const fullPlayerData = this.state.fullPlayerData
     return (
       <Router>
         <Route component={Nav} />
@@ -78,13 +61,18 @@ class Routes extends React.Component {
         <Route 
           exact
           path="/"
-          render={(props) => <HomeNew {...props} seasonData={playerSeasonData} allPlayers={playerGameData} />}
+          render={(props) => <HomeNew {...props} allPlayers={fullPlayerData} />}
         />
         <Route 
           exact
           path="/player/:id"
-          render={(props) => <DefensivePlayer {...props} players={playerGameData} />}
-        /> 
+          render={(props) => <DefensivePlayer {...props} players={fullPlayerData} />}
+        />
+        <Route
+          exact
+          path="/teams/forge"
+          render={(props) => <Forge {...props} />}
+        />
         <Route component={Footer} />
       </Router>
     )

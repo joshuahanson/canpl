@@ -50,35 +50,32 @@ class DefensivePlayer extends React.Component {
 
   updatePlayerData(data) {
     const { match } = this.props
-    let playerList = []
-    data.map(game => {
-      if (match.params.id === game.playerId) {
-        playerList.push(game)
-      }
-    })
-    playerList.sort((d1, d2) => new Date(d1.date).getTime() - new Date(d2.date).getTime())
-    this.setState({ playerData: playerList })
+    const matchingPlayer = data.filter(item => item.optaPersonId === match.params.id)[0]
+    if (matchingPlayer) {
+      this.setState({ playerData: matchingPlayer })
+    }
   }
 
   render() {
     const data = this.state.playerData
-    if (data && data.length > 0) {
-      const playerName = data[0].player
-      const gameMins = renderMinutes(data)
-      const interCeptionsYear = renderInterceptions(data)
-      const clearancesYear = renderClearances(data)
+    if (data && data.player) {
+      const dataGames = data.games
+      
+      const playerName = data.player
+      const gameMins = renderMinutes(dataGames)
+      const interCeptionsYear = renderInterceptions(dataGames)
+      const clearancesYear = renderClearances(dataGames)
       const duelsSeason = renderDuelsSeason(data)
-      const blocksSeason = renderBlocksSeason(data)
-      const tacklesSeason = renderTackle(data)
-      const playerAge = data[0].Age
-      const playerTeam = data[0].team
+      const blocksSeason = renderBlocksSeason(dataGames)
+      const tacklesSeason = renderTackle(dataGames)
+      const playerAge = data.Age
+      const playerTeam = data.team
 
-      const SIntercepts = returnInterceptionsNinety(data)
-      const STackles = returnTacklePerNinety(data)
-      const SBlocks = returnBlocksPerNinety(data)
-      const SClearances = returnClearancesPerNinety(data)
-      const SRecoveries = returnRecoveriesPerNinety(data)
-
+      const SIntercepts = returnInterceptionsNinety(dataGames)
+      const STackles = returnTacklePerNinety(dataGames)
+      const SBlocks = returnBlocksPerNinety(dataGames)
+      const SClearances = returnClearancesPerNinety(dataGames)
+      const SRecoveries = returnRecoveriesPerNinety(dataGames)
 
       const series = [
         {
@@ -162,7 +159,7 @@ class DefensivePlayer extends React.Component {
                       <th>TchsM3</th>
                       <th>TchsA3</th>
                     </tr>
-                    {data.map(game => {
+                    {dataGames.map(game => {
                       return (
                         <tr style={{position: 'relative'}}>
                           <td>
