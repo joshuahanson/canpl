@@ -11,13 +11,14 @@ const Card = styled.div`
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1em;
+  padding: 0 1em;
 `
 
 const FlexContainer = styled(Container)`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
+  grid-gap: 1rem;
 `
 
 export { Card, Container, FlexContainer }

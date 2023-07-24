@@ -9,8 +9,8 @@ class Nav extends React.Component {
     return (
       <StyledNav>
           <Link to="/">
-            <img src={logo} />
-            <span style={{textAlign: 'center'}}>CANPLSCOUTING</span>
+            <img src="/cpl-white.png" />
+            <span style={{textAlign: 'center'}}>CPL Scouting</span>
           </Link>
       </StyledNav>
     )
@@ -19,12 +19,12 @@ class Nav extends React.Component {
 
 const StyledNav = styled.nav`
   padding: 1em;
-  text-align: center;
+  background: var(--cpl-blue);
+  color: white;
 
   a { 
     display: flex;
     align-items: center;
-    justify-content: center;
     color: inherit;
     text-decoration: none;
 
