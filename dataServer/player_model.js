@@ -4,7 +4,7 @@ const _ = require("lodash");
 const getPlayers = (req) => {
   return new Promise(function (resolve, reject) {
     const { id, year, limit } = req.query;
-    const limitBy = limit || 1000;
+    const limitBy = limit || 10;
 
     const playersList = allPlayers(id, year).slice(0, limitBy);
 
@@ -69,7 +69,7 @@ const _getPlayerBySeason = (id) => {
 const getGames = (req) => {
   return new Promise(function (resolve, reject) {
     const { year, id, limit } = req.query;
-    const limitBy = limit || 1000;
+    const limitBy = limit || 100;
     const games = allGames(year, id).slice(0, limitBy);
     resolve(games);
   });

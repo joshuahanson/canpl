@@ -1,19 +1,17 @@
 const express = require("express");
+const cors = require("cors");
+const expressStaticGzip = require("express-static-gzip");
+const path = require("path");
+
+const STATIC_FOLDER = path.join(__dirname, "../", "build/");
+
 const app = express();
 const port = 3001;
 
 const player_model = require("./player_model");
 
 app.use(express.json());
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Access-Control-Allow-Headers"
-  );
-  next();
-});
+app.use(cors());
 
 app.get("/players", (req, res) => {
   player_model
@@ -58,6 +56,10 @@ app.get("/games", (req, res) => {
       res.status(500).send(error);
     });
 });
+
+app.use(expressStaticGzip(STATIC_FOLDER));
+app.get("*", expressStaticGzip(STATIC_FOLDER));
+app.use("*", expressStaticGzip(STATIC_FOLDER));
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

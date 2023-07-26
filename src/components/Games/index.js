@@ -18,7 +18,7 @@ class Games extends React.Component {
   }
 
   getGames() {
-    fetch(`http://localhost:3001/games?year=2022&limit=67`)
+    fetch(`/games?year=2022&limit=30`)
       .then((response) => {
         return response.text();
       })

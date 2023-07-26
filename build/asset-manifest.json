@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.76c5bc95.css",
+    "main.js": "/static/js/main.6505f55f.js",
+    "static/media/CentreCircle.png": "/static/media/CentreCircle.37f96e039b74cdd89162.png",
+    "static/media/StatsPerform.png": "/static/media/StatsPerform.e5051cd05bd8374087fc.png",
+    "static/media/Island_Games_logo.png": "/static/media/Island_Games_logo.a92906b049719da221b3.png",
+    "index.html": "/index.html",
+    "main.76c5bc95.css.map": "/static/css/main.76c5bc95.css.map",
+    "main.6505f55f.js.map": "/static/js/main.6505f55f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76c5bc95.css",
+    "static/js/main.6505f55f.js"
+  ]
+}

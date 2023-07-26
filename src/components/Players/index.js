@@ -14,22 +14,22 @@ class Players extends React.Component {
   }
 
   componentDidMount() {
-    this.getPlayers();
+    // this.getPlayers();
   }
 
-  getPlayers() {
-    fetch(`http://localhost:3001/players?year=2022&limit=222200`)
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        if (data && data.length > 0) {
-          this.setState({ allPlayerData: JSON.parse(data) });
-          return data;
-        }
-        return [];
-      });
-  }
+  // getPlayers() {
+  //   fetch(`/players?year=2022&limit=20`)
+  //     .then((response) => {
+  //       return response.text();
+  //     })
+  //     .then((data) => {
+  //       if (data && data.length > 0) {
+  //         this.setState({ allPlayerData: JSON.parse(data) });
+  //         return data;
+  //       }
+  //       return [];
+  //     });
+  // }
 
   renderPlayerData() {
     const allPlayerData = this.state.allPlayerData;

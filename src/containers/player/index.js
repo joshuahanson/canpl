@@ -68,7 +68,7 @@ class Player extends React.Component {
   }
 
   getPlayerByGames(id) {
-    fetch(`http://localhost:3001/player-games?id=${id}`)
+    fetch(`/player-games?id=${id}`)
       .then((response) => {
         return response.text();
       })
@@ -86,7 +86,7 @@ class Player extends React.Component {
   }
 
   getPlayerBySeason(id) {
-    fetch(`http://localhost:3001/player-totals?id=${id}`)
+    fetch(`/player-totals?id=${id}`)
       .then((response) => {
         return response.text();
       })

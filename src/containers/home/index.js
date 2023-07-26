@@ -1,5 +1,5 @@
 import React from "react";
-import Players from "../../components/Players";
+// import Players from "../../components/Players";
 import Games from "../../components/Games"
 import SortBar from "../../components/SortBar";
 
@@ -24,7 +24,7 @@ class Home extends React.Component {
       <div className="App">
         <Games />
         <SortBar role={role} sortedBy={sortedBy} history={history} />
-        <Players {...this.props} />
+        {/* <Players {...this.props} /> */}
       </div>
     );
   }
